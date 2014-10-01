@@ -1,12 +1,14 @@
 package br.com.vixsystem.model;
-
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.ManyToMany;
 
 
 public class Usuario {
 	
-	private static final long serialVersionUID = 1L;
+	//private static final long serialVersionUID = 1L;
 
 	
 	private Long idUsuario;
@@ -14,15 +16,16 @@ public class Usuario {
 	private String login;
 	private String nomeCompleto;
 	private String senha;
-	private Collection<Usuario> colecaoUsuarios;
+	@ManyToMany
+	private Set<Usuario> colecaoUsuarios = new HashSet<Usuario>();
+
 			
 	public Usuario(){
 		
 	}
 	
 	public Usuario(Long idUsuario, boolean ativo, String login, String nomeCompleto,
-			String senha, Collection<Usuario> colecaoUsuarios) {
-		super();
+			String senha, Set<Usuario> colecaoUsuarios) {
 		this.idUsuario = idUsuario;
 		this.ativo = ativo;
 		this.login = login;
@@ -30,6 +33,7 @@ public class Usuario {
 		this.senha = senha;
 		this.colecaoUsuarios = colecaoUsuarios;
 	}
+	
 	
 	public Long getIdUsuario() {
 		return idUsuario;
@@ -75,12 +79,12 @@ public class Usuario {
 		return colecaoUsuarios;
 	}
 
-	public void setColecaoUsuarios(Collection<Usuario> colecaoUsuarios) {
+	public void setColecaoUsuarios(Set<Usuario> colecaoUsuarios) {
 		this.colecaoUsuarios = colecaoUsuarios;
 	}
 	public void adicionaUsuario(Usuario Usuario) {  
         if (this.colecaoUsuarios == null) {
-            this.colecaoUsuarios = new ArrayList<Usuario>();  
+            this.colecaoUsuarios = new HashSet<Usuario>();  
         }
         this.colecaoUsuarios.add(Usuario);
     }

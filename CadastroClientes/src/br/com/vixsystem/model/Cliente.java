@@ -1,10 +1,14 @@
 package br.com.vixsystem.model;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+@Entity
 public class Cliente {
 
 	private Long idUsuario;
@@ -12,6 +16,7 @@ public class Cliente {
 	private String nome;
 	private String endereco;
 	private String tipo;
+	private List<Cliente> clientes = new ArrayList<Cliente>();
 	
 	@Temporal(TemporalType.DATE)
 	private Calendar dataCadastro = Calendar.getInstance();
@@ -19,6 +24,10 @@ public class Cliente {
 	
 	public Cliente(){
 		
+	}
+	
+	public void adicionaCliente(Cliente cliente){
+		this.clientes.add(cliente);
 	}
 	
 	public Long getIdUsuario() {
